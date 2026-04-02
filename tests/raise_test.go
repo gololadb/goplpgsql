@@ -163,8 +163,8 @@ func TestAssertWithMessage(t *testing.T) {
 		END
 	`)
 	s := block.Body[0].(*parser.StmtAssert)
-	// SCONST strips quotes
-	if s.Message != "x must be positive" {
+	// String literals are re-quoted.
+	if s.Message != "'x must be positive'" {
 		t.Errorf("expected message, got %q", s.Message)
 	}
 }

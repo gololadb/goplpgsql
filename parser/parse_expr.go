@@ -7,18 +7,19 @@ import (
 )
 
 // readExprUntilSemi reads tokens until ';' at depth 0, returns the text.
+// String literals are re-quoted so the expression is valid SQL.
 func (p *Parser) readExprUntilSemi() string {
-	return p.collectTokens(scanner.Token(';'), 0, 0, false)
+	return p.collectTokens(scanner.Token(';'), 0, 0, true)
 }
 
 // readExprUntilThen reads tokens until K_THEN at depth 0.
 func (p *Parser) readExprUntilThen() string {
-	return p.collectTokens(scanner.K_THEN, 0, 0, false)
+	return p.collectTokens(scanner.K_THEN, 0, 0, true)
 }
 
 // readExprUntilLoop reads tokens until K_LOOP at depth 0.
 func (p *Parser) readExprUntilLoop() string {
-	return p.collectTokens(scanner.K_LOOP, 0, 0, false)
+	return p.collectTokens(scanner.K_LOOP, 0, 0, true)
 }
 
 // readSQLUntilSemi reads tokens until ';' at depth 0, returns the text.

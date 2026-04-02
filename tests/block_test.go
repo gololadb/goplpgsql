@@ -97,9 +97,9 @@ func TestDeclDefault(t *testing.T) {
 	if block.Decls[0].Default != "42" {
 		t.Errorf("expected default '42', got %q", block.Decls[0].Default)
 	}
-	// SCONST strips quotes, so the literal is just "hello"
-	if block.Decls[1].Default != "hello" {
-		t.Errorf("expected default \"hello\", got %q", block.Decls[1].Default)
+	// String literals are re-quoted so they remain valid SQL expressions.
+	if block.Decls[1].Default != "'hello'" {
+		t.Errorf("expected default \"'hello'\", got %q", block.Decls[1].Default)
 	}
 	if block.Decls[2].Default != "0" {
 		t.Errorf("expected default '0', got %q", block.Decls[2].Default)
